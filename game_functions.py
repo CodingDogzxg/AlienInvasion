@@ -203,7 +203,7 @@ def ship_hit(ai_settings, screen, stats, sb, ship, aliens, bullets):
         stats.ships_left -= 1
 
         # 更新记分牌
-        sb.prep_ship()
+        sb.prep_ships()
 
         # 清空外星人列表和子弹列表
         aliens.empty()
