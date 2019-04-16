@@ -6,6 +6,7 @@ from pygame.sprite import Group
 from alien import Alien
 from game_stats import GameStats
 from button import Button
+from scoreboard import Scoreboard
 
 
 def run_game():
@@ -23,6 +24,9 @@ def run_game():
 
     # 创建一个用于储存游戏统计信息的实例
     stats = GameStats(ai_settings)
+
+    # 创建一个储存游戏统计信息的积分板实例， 并创建记分板
+    sb = Scoreboard(ai_settings, screen, stats)
 
     # 创建一个飞船的实例
     ship = Ship(ai_settings, screen)  # 必须在主while之前创建实例，以免每次循环都创建一艘飞船
@@ -48,7 +52,7 @@ def run_game():
             gf.update_bullets(ai_settings, screen, ship, aliens, bullets)
             gf.update_aliens(ai_settings, stats, screen, ship, aliens, bullets)
 
-        gf.update_screen(ai_settings, screen, ship, aliens, bullets, play_button, stats)
+        gf.update_screen(ai_settings, screen, ship, aliens, bullets, play_button, stats, sb)
 
 
 """

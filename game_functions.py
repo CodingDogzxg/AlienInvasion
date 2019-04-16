@@ -51,6 +51,9 @@ def check_play_button(ai_settings, screen, stats, play_button, ship, aliens, bul
     """在玩家单击Play按钮开始游戏"""
     button_clicked = play_button.rect.collidepoint(mouse_x, mouse_y)
     if button_clicked and not stats.game_active:  # 仅当玩家单击按钮且游戏当前处于非活跃状态时才运行以下代码
+        # 重置游戏设置
+        ai_settings.initialize_dynamic_settings()
+
         # 隐藏光标
         pygame.mouse.set_visible(False)
         # 重置游戏信息
@@ -86,7 +89,7 @@ def check_events(ship):
 """
 
 
-def update_screen(ai_settings, screen, ship, aliens, bullets, play_button, stats):
+def update_screen(ai_settings, screen, ship, aliens, bullets, play_button, stats, sb):
     """更新屏幕上的图像 并且换到新屏幕"""
     screen.fill(ai_settings.bg_color)  # 调用settings类中的颜色属性作为填充背景色
 
@@ -97,6 +100,9 @@ def update_screen(ai_settings, screen, ship, aliens, bullets, play_button, stats
     ship.blitme()  # 填充背景后，调用blitme来将飞船绘制在屏幕上 确保飞船在背景前
 
     aliens.draw(screen)  # 绘制外星人
+
+    # 显示得分
+    sb.show_score()
 
     # 如果游戏处于非活动状态，就绘制按钮
     if not stats.game_active:
@@ -128,8 +134,9 @@ def check_bullet_alien_collision(ai_settings, screen, ship, aliens, bullets):
     # 这个赋值语句是没有任何作用滴 有后半部分的groupcollide存在就行
 
     if len(aliens) == 0:  # 将屏幕上的所有外星人全部消灭了?
-        # 删除现有的子弹并创建新的一群外星人
-        bullets.empty()  # 将屏幕上的子弹全部删除
+        # 删除现有的子弹，加快游戏速度，并创建新的一群外星人
+        bullets.empty()
+        ai_settings.increase_speed()
         create_fleet(ai_settings, screen, ship, aliens)  # 创建一个新的外星人舰队
 
 
