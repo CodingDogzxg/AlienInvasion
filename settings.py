@@ -12,7 +12,7 @@ class Seetings():
 
         # 子弹设置
         """self.bullet_speed_factor = 3"""
-        self.bullet_width = 3
+        self.bullet_width = 300
         self.bullet_height = 15
         self.bullet_color = 60, 60, 60
         self.bullets_allowed = 5
@@ -25,6 +25,7 @@ class Seetings():
 
         # 以什么样的速度加快游戏节奏 倍数增长
         self.speedup_scale = 1.1
+        self.score_scale = 1.5
 
         self.initialize_dynamic_settings()
 
@@ -36,6 +37,8 @@ class Seetings():
 
         # fleet_direction为1表示向右移， -1表示向左移动
         self.fleet_direction = 1
+        # 计分
+        self.alien_points = 50
 
     def increase_speed(self):
         """提高游戏速度"""

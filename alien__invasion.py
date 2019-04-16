@@ -45,12 +45,12 @@ def run_game():
     # 开始游戏主循环 每次循环都会重绘屏幕
     while True:  # 处理响应事件
 
-        gf.check_events(ai_settings, screen, stats, play_button, ship, aliens, bullets)
+        gf.check_events(ai_settings, screen, stats, sb, play_button, ship, aliens, bullets)
 
         if stats.game_active:  # 如果游戏状态是活动的 处理游戏中心代码
             ship.update()  # 用检测完毕的鼠标代码事件控制飞船的移动
-            gf.update_bullets(ai_settings, screen, ship, aliens, bullets)
-            gf.update_aliens(ai_settings, stats, screen, ship, aliens, bullets)
+            gf.update_bullets(ai_settings, screen, stats, sb, ship, aliens, bullets)
+            gf.update_aliens(ai_settings, screen, stats, sb, ship, aliens, bullets)
 
         gf.update_screen(ai_settings, screen, ship, aliens, bullets, play_button, stats, sb)
 

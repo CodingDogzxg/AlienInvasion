@@ -6,7 +6,9 @@ class GameStats():
         """初始化统计信息"""
         self.ai_settings = ai_settings
         self.reset_stats()
-        self.score = 0
+
+        # 任何情况下都不应该重置最高分数
+        self.high_score = 0
 
     def reset_stats(self):
         """初始化在游戏运行期间可能变化的统计信息"""
@@ -15,3 +17,7 @@ class GameStats():
         # 游戏刚启动时处于非活动状态
         self.game_active = False
 
+        # 清零分数
+        self.score = 0
+
+        self.level = 1
