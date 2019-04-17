@@ -66,7 +66,7 @@ def check_play_button(ai_settings, screen, stats, sb, play_button, ship, aliens,
                 print(stats.high_score)
         except FileNotFoundError:
             stats.high_score = 0
-            print("Did found the stored highest score!")
+            print("Didn't found the stored highest score!")
 
         # 隐藏光标
         pygame.mouse.set_visible(False)
