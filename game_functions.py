@@ -70,6 +70,7 @@ def check_play_button(ai_settings, screen, stats, sb, play_button, ship, aliens,
 
         # 隐藏光标
         pygame.mouse.set_visible(False)
+        
         # 重置游戏信息
         stats.reset_stats()
         stats.game_active = True
