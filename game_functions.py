@@ -3,6 +3,11 @@ import pygame
 from bullet import Bullet
 from alien import Alien
 from time import sleep
+import json
+
+
+# 最高分文件名
+file_name = "highest_score.json"
 
 
 def check_keydown_events(event, ai_settings, screen, ship, bullets):
@@ -53,6 +58,15 @@ def check_play_button(ai_settings, screen, stats, sb, play_button, ship, aliens,
     if button_clicked and not stats.game_active:  # 仅当玩家单击按钮且游戏当前处于非活跃状态时才运行以下代码
         # 重置游戏设置
         ai_settings.initialize_dynamic_settings()
+
+        # 读取最高分
+        try:
+            with open(file_name, "r") as obj_load:
+                stats.high_score = json.load(obj_load)
+                print(stats.high_score)
+        except FileNotFoundError:
+            stats.high_score = 0
+            print("Did found the stored highest score!")
 
         # 隐藏光标
         pygame.mouse.set_visible(False)
@@ -262,6 +276,8 @@ def check_high_score(stats, sb):
     if stats.score > stats.high_score:
         stats.high_score = stats.score
         sb.prep_high_score()
+        with open(file_name, "w") as obj_write:
+            json.dump(stats.high_score, obj_write)
 
 """
 def creat_fleet(ai_settings, screen, aliens):
